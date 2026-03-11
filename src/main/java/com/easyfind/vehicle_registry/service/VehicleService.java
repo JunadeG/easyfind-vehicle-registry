@@ -18,8 +18,14 @@ public class VehicleService {
 
 
     public Vehicle register( Vehicle vehicle) {
-      int currentYear = Year.now().getValue();
+      if (vehicle == null) {
+          throw new ResponseStatusException(
+                  HttpStatus.BAD_REQUEST,  "Vehicle data cannot be null"
+          );
+      }
 
+
+      int currentYear = Year.now().getValue();
       if (vehicle.getYear() > currentYear) {
           throw new ResponseStatusException(
                   HttpStatus.BAD_REQUEST,

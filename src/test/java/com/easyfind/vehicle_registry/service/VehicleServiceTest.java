@@ -60,4 +60,20 @@ class VehicleServiceTest {
         assertNotNull(result);
         verify(vehicleRepository, times(1)).save(validVehicle);
     }
+
+    @Test
+    void register_ShouldThrowException_WhenYearIsFuture() {
+        // Arrange
+        Vehicle futureVehicle = new Vehicle();
+        futureVehicle.setYear(2099);
+
+        // Act & Assert
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+            vehicleService.register(futureVehicle);
+        });
+
+        // Verify details
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
+        assertTrue(exception.getReason().contains("future"));
+    }
 }
