@@ -1,4 +1,4 @@
-package com.easyfind.vehicle;
+package com.easyfind.vehicle_registry;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

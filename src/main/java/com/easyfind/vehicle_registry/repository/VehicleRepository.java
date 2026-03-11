@@ -1,6 +1,6 @@
-package com.easyfind.vehicle.repository;
+package com.easyfind.vehicle_registry.repository;
 
-import com.easyfind.vehicle.model.Vehicle;
+import com.easyfind.vehicle_registry.model.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
