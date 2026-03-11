@@ -1,0 +1,32 @@
+package com.easyfind.vehicle_registry.controller;
+
+import com.easyfind.vehicle_registry.model.Vehicle;
+import com.easyfind.vehicle_registry.repository.VehicleRepository;
+import com.easyfind.vehicle_registry.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/vehicles")
+public class VehicleController {
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
+    @Autowired
+    private VehicleService vehicleService;
+
+    @GetMapping
+    public List<Vehicle> getAll() {
+        return vehicleRepository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<Vehicle> registerVehicle(@RequestBody Vehicle vehicle) {
+        Vehicle savedVehicle = vehicleService.register(vehicle);
+        return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
+    }
+}

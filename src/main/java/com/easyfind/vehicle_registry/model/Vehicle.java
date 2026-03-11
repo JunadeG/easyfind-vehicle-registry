@@ -1,4 +1,4 @@
-package com.easyfind.vehicle.model;
+package com.easyfind.vehicle_registry.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
