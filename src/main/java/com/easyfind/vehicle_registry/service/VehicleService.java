@@ -23,6 +23,7 @@ public class VehicleService {
     }
 
 
+
     public Vehicle register( Vehicle vehicle) {
       if (vehicle == null) {
           throw new ResponseStatusException(
