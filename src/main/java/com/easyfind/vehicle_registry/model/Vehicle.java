@@ -15,5 +15,5 @@ public class Vehicle {
     private String licensePlate;
     private Integer year;
     private String status; // e.g., AVAILABLE, IN_USE, MAINTENANCE
-    // qwerty
+    // this model is managed by the Fleet Team
 }
