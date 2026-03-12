@@ -14,50 +14,47 @@ import java.util.stream.Collectors;
 @Service
 public class VehicleService {
 
-
     private final VehicleRepository vehicleRepository;
 
     public VehicleService(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
 
+    public Vehicle register(Vehicle vehicle) {
+        if (vehicle == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Vehicle data cannot be null"
+            );
+        }
 
-
-    public Vehicle register( Vehicle vehicle) {
-      if (vehicle == null) {
-          throw new ResponseStatusException(
-                  HttpStatus.BAD_REQUEST,  "Vehicle data cannot be null"
-          );
-      }
-
-
-      int currentYear = Year.now().getValue();
-      if (vehicle.getYear() > currentYear) {
-          throw new ResponseStatusException(
-                  HttpStatus.BAD_REQUEST,
-                  "Vehicle year cannot be in the future. Current year is " + currentYear
-          );
-      }
+        int currentYear = Year.now().getValue();
+        if (vehicle.getYear() > currentYear) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Vehicle year cannot be in the future. Current year is " + currentYear
+            );
+        }
         return vehicleRepository.save(vehicle);
     }
 
-
-    private VehicleResponseDTO convertDTO(Vehicle vehicle){
+    private VehicleResponseDTO convertDTO(Vehicle vehicle) {
         VehicleResponseDTO dto = new VehicleResponseDTO();
         dto.setFullName(vehicle.getMake() + " " + vehicle.getModel());
         dto.setYear(vehicle.getYear());
 
 
-
-        if (vehicle.getOwner() != null){
+        if (vehicle.getOwner() != null) {
             dto.setOwnerName(vehicle.getOwner().getName());
-        }else{
+        } else {
             dto.setOwnerName("Unassigned");
         }
+
         return dto;
     }
 
-    public List<VehicleResponseDTO> getAllVehiclesDTO(){
-        return vehicleRepository.findAll().stream().map(this::convertDTO).collect(Collectors.toList());
+    public List<VehicleResponseDTO> getAllVehiclesDTO() {
+        return vehicleRepository.findAll().stream()
+                .map(this::convertDTO)
+                .collect(Collectors.toList());
     }
 }
