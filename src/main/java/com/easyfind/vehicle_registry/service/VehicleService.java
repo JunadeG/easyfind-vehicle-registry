@@ -3,7 +3,6 @@ package com.easyfind.vehicle_registry.service;
 import com.easyfind.vehicle_registry.dto.VehicleResponseDTO;
 import com.easyfind.vehicle_registry.model.Vehicle;
 import com.easyfind.vehicle_registry.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,6 +46,14 @@ public class VehicleService {
         VehicleResponseDTO dto = new VehicleResponseDTO();
         dto.setFullName(vehicle.getMake() + " " + vehicle.getModel());
         dto.setYear(vehicle.getYear());
+
+
+
+        if (vehicle.getOwner() != null){
+            dto.setOwnerName(vehicle.getOwner().getName());
+        }else{
+            dto.setOwnerName("Unassigned");
+        }
         return dto;
     }
 

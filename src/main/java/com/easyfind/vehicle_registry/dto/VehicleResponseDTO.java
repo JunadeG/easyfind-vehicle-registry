@@ -6,5 +6,6 @@ import lombok.Data;
 public class VehicleResponseDTO {
    private String fullName;
    private Integer year;
+   private String ownerName;
 
 }

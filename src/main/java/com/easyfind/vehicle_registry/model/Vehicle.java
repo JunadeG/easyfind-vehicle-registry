@@ -6,6 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "vehicles")
 @Data
+
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +17,7 @@ public class Vehicle {
     private Integer year;
     private String status; // e.g., AVAILABLE, IN_USE, MAINTENANCE
     // this model is managed by the Fleet Team
+
+    @ManyToOne
+    private Owner owner;
 }

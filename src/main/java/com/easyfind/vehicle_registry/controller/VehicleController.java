@@ -4,7 +4,6 @@ import com.easyfind.vehicle_registry.dto.VehicleResponseDTO;
 import com.easyfind.vehicle_registry.model.Vehicle;
 import com.easyfind.vehicle_registry.repository.VehicleRepository;
 import com.easyfind.vehicle_registry.service.VehicleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
