@@ -1,5 +1,6 @@
 package com.easyfind.vehicle_registry.service;
 
+import com.easyfind.vehicle_registry.dto.VehicleResponseDTO;
 import com.easyfind.vehicle_registry.model.Vehicle;
 import com.easyfind.vehicle_registry.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Year;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleService {
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
+
+    private final VehicleRepository vehicleRepository;
+
+    public VehicleService(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
 
 
 
@@ -33,5 +40,17 @@ public class VehicleService {
           );
       }
         return vehicleRepository.save(vehicle);
+    }
+
+
+    private VehicleResponseDTO convertDTO(Vehicle vehicle){
+        VehicleResponseDTO dto = new VehicleResponseDTO();
+        dto.setFullName(vehicle.getMake() + " " + vehicle.getModel());
+        dto.setYear(vehicle.getYear());
+        return dto;
+    }
+
+    public List<VehicleResponseDTO> getAllVehiclesDTO(){
+        return vehicleRepository.findAll().stream().map(this::convertDTO).collect(Collectors.toList());
     }
 }
