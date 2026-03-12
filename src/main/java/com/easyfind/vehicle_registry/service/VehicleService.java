@@ -15,9 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class VehicleService {
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
 
+    private final VehicleRepository vehicleRepository;
+
+    public VehicleService(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
 
 
     public Vehicle register( Vehicle vehicle) {
